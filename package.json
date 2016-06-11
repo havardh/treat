@@ -4,7 +4,7 @@
   "description": "Treat",
   "main": "index.js",
   "scripts": {
-    "build": "NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
+    "postinstall": "NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
     "start": "node ./app.js"
   },
   "repository": {
