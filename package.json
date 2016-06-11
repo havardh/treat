@@ -1,0 +1,23 @@
+{
+  "name": "treat",
+  "version": "0.0.1",
+  "description": "Treat",
+  "main": "index.js",
+  "scripts": {
+    "build": "NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
+    "start": "node ./app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/havardh/treat.git"
+  },
+  "author": "Håvard Høiby <havardwhoiby@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/havardh/treat/issues"
+  },
+  "homepage": "https://github.com/havardh/treat#readme",
+  "dependencies": {
+    "react-router": "^2.4.1"
+  }
+}
