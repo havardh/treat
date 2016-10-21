@@ -20,6 +20,10 @@ module.exports = {
     new webpack.NoErrorsPlugin()
   ],
 
+  devServer: {
+     historyApiFallback: true
+ },
+
   module: {
     loaders: [
       { test: /\.js?$/,

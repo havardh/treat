@@ -1,5 +1,10 @@
 import React from 'react'
 
+import {
+  Button,
+  ButtonGroup
+} from 'react-bootstrap';
+
 import Store from '../store/store'
 
 export default class Meal extends React.Component {
@@ -52,7 +57,18 @@ export default class Meal extends React.Component {
     this.props.history.push(`day/${date}`)
   }
 
+  onKeyPress (event) {
+    console.log(event.charCode, event.keyCode)
+    if (event.charCode == 13) {
+      this.add();
+    }
+  }
+
   render () {
+
+    const ifSet = (state, clazz) => this.state.feal === state ? `btn ${clazz}` : "btn"
+
+
     return (
       <div>
         <input placeholder={"Navn"}
@@ -64,37 +80,28 @@ export default class Meal extends React.Component {
           value={this.state.time}
           /><br />
 
-        <input
-          type="radio"
-          name="feal"
-          value="bad"
-          onClick={this.setFeal.bind(this, "bad")}
-        />bad <br />
-        <input
-          type="radio"
-          name="feal"
-          value="ok"
-          onClick={this.setFeal.bind(this, "bad")}
-        />ok <br />
-        <input
-          type="radio"
-          name="feal"
-          value="good"
-          onClick={this.setFeal.bind(this, "bad")}
-        />good <br />
+        <ButtonGroup>
+          <Button bsClass={ifSet("bad", "btn-danger")} onClick={this.setFeal.bind(this, "bad")}>bad</Button>
+          <Button bsClass={ifSet("ok", "btn-warning")} onClick={this.setFeal.bind(this, "ok")}>ok</Button>
+          <Button bsClass={ifSet("good", "btn-success")} onClick={this.setFeal.bind(this, "good")}>good</Button>
+        </ButtonGroup>
 
         <ul>
           {(this.state.ingredients || []).map((ingredient, i) => (
             <li key={i}>
-              <input value={ingredient} onChange={this.set.bind(this, i)} />
-              <button onClick={this.remove.bind(this, i)}>-</button>
+              <input
+                onKeyPress={i == this.state.ingredients.length - 1 ? this.onKeyPress.bind(this) : () => {}}
+                value={ingredient}
+                onChange={this.set.bind(this, i)} />
+
+              <Button onClick={this.remove.bind(this, i)}>-</Button>
             </li>
           ))}
         </ul>
-        <button onClick={this.add.bind(this)}>+</button>
+        <Button onClick={this.add.bind(this)}>+</Button>
         <br />
         <br />
-        <button onClick={this.save.bind(this)}>Save</button>
+        <Button onClick={this.save.bind(this)}>Save</Button>
       </div>
     )
   }

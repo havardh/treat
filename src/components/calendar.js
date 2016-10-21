@@ -1,7 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router'
+import { hashHistory } from 'react-router'
+
+import { Button } from 'react-bootstrap'
 
 export default class Calendar extends React.Component {
+
+  openDay (day) {
+    hashHistory.push(`day/${day}`)
+  }
+
   render () {
 
     const month = [
@@ -20,7 +27,11 @@ export default class Calendar extends React.Component {
               <tr key={i}>
                 {week.map((day, i) => (
                   <td key={i}>
-                    <Link to={`day/${day}`}>{day}</Link>
+                    {day !== "" &&
+                      <Button onClick={this.openDay.bind(null, day)}>
+                        {day}
+                      </Button>
+                    }
                   </td>
                 ))}
               </tr>
